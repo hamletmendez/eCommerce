@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (userData.getPassword().equals(password)){
 
                         if (parentDBName.equals("admins")){
-                            Intent intent = new Intent(LoginActivity.this,AddNewProductActivity.class);
+                            Intent intent = new Intent(LoginActivity.this,CategoryActivity.class);
                             startActivity(intent);
                         }
                         else if(parentDBName.equals("users")){
