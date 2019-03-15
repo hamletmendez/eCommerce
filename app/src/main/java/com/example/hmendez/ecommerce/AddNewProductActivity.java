@@ -1,5 +1,6 @@
 package com.example.hmendez.ecommerce;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -42,6 +43,7 @@ private final static  int galleryPick = 1;
 private Uri imageUri;
 private StorageReference productImageRef;
 private DatabaseReference productsRef;
+private ProgressDialog loadingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,8 @@ private DatabaseReference productsRef;
         inputProductName = findViewById(R.id.product_name);
         inputProductDescription = findViewById(R.id.product_description);
         inputProductPrice = findViewById(R.id.product_price);
+
+        loadingBar = new ProgressDialog(this);
 
         inputProductImage = findViewById(R.id.select_product_image);
 
@@ -99,9 +103,16 @@ private DatabaseReference productsRef;
     }
 
     private void StoreProductInformation() {
+
+        loadingBar.setTitle("Add New Product");
+        loadingBar.setMessage("Please wait, while we are adding the new product...");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
+
         Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd,yyyy");
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
         saveCurrentDate = currentDate.format(calendar.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
@@ -137,6 +148,9 @@ private DatabaseReference productsRef;
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()){
+
+                            downLoadImageUrl = task.getResult().toString();
+
                             Toast.makeText(AddNewProductActivity.this, "Product image loaded to database successfully...", Toast.LENGTH_SHORT).show();
 
                             SaveProductInfoToDatabase();
@@ -166,9 +180,13 @@ private DatabaseReference productsRef;
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
+                            loadingBar.dismiss();
+
+                            Intent intent = new Intent(AddNewProductActivity.this,CategoryActivity.class);
                             Toast.makeText(AddNewProductActivity.this, "Product added successfully...", Toast.LENGTH_SHORT).show();
                         }
                         else{
+                            loadingBar.dismiss();
                             String message = task.getException().toString();
                             Toast.makeText(AddNewProductActivity.this, "Error: " + message , Toast.LENGTH_SHORT).show();
                         }
