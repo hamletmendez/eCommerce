@@ -128,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else if(parentDBName.equals("users")){
                             Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                            Prevalent.currentOnLineUsers = userData;
                             startActivity(intent);
                         }
                     }
