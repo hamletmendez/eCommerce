@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_product_relative_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddNewProductActivity">
@@ -49,7 +50,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/product_description"
-        android:inputType="textMultiLine"
         android:layout_marginTop="20dp"
         android:padding="20dp"
         android:hint="Product Price..."

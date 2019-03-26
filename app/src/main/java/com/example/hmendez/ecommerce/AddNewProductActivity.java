@@ -1,6 +1,8 @@
 package com.example.hmendez.ecommerce;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -9,9 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -59,6 +64,19 @@ private ProgressDialog loadingBar;
         inputProductName = findViewById(R.id.product_name);
         inputProductDescription = findViewById(R.id.product_description);
         inputProductPrice = findViewById(R.id.product_price);
+
+
+        //hide Soft keyboard on click outside  the input text
+        findViewById(R.id.new_product_relative_layout).setOnClickListener(new
+                  View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 InputMethodManager im = (InputMethodManager)
+                         getSystemService(INPUT_METHOD_SERVICE);
+                 im.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                         0);
+             }
+         });
 
         loadingBar = new ProgressDialog(this);
 
@@ -211,4 +229,7 @@ private ProgressDialog loadingBar;
             inputProductImage.setImageURI(imageUri);
         }
     }
+
+
+
 }
