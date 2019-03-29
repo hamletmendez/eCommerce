@@ -125,7 +125,7 @@ public class SettingsActivity extends AppCompatActivity {
         userMap.put("phoneOrder",userPhoneEditText.getText().toString());
         databaseReference.child(Prevalent.currentOnLineUsers.getPhone()).updateChildren(userMap);
 
-        startActivity(new Intent(SettingsActivity.this,MainActivity.class));
+        startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
         Toast.makeText(SettingsActivity.this, "Profile info updated successfully!", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -187,7 +187,7 @@ public class SettingsActivity extends AppCompatActivity {
                         databaseReference.child(Prevalent.currentOnLineUsers.getPhone()).updateChildren(userMap);
 
                         progressDialog.dismiss();
-                        startActivity(new Intent(SettingsActivity.this,MainActivity.class));
+                        startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
                         Toast.makeText(SettingsActivity.this, "Profile info updated successfully!", Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -223,9 +223,6 @@ public class SettingsActivity extends AppCompatActivity {
                         fullNameEditText.setText(name);
                         userPhoneEditText.setText(phone);
                         addressEditText.setText(address);
-
-
-
                     }
                 }
 
