@@ -71,12 +71,15 @@ public class HomeActivity extends AppCompatActivity
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
+        userNameTextView.setText(Prevalent.currentOnLineUsers.getName());
+        Picasso.get().load(Prevalent.currentOnLineUsers.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        userNameTextView.setText(Prevalent.currentOnLineUsers.getName());
+
     }
 
     @Override
